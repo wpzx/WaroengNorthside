@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Waroeng Northside - SAMP Servers</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1e40af;
+            --secondary: #3b82f6;
+            --accent: #f97316;
+            --dark: #0f172a;
+            --light: #f8fafc;
+            --gray: #64748b;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
+            color: var(--light);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        
+        .container {
+            width: 100%;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            background-color: rgba(30, 41, 59, 0.5);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            text-align: center;
+        }
+        
+        .logo {
+            margin-bottom: 25px;
+        }
+        
+        .logo img {
+            width: 250px;
+            height: 120px;
+        }
+        
+        .title {
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: var(--light);
+        }
+        
+        .subtitle {
+            color: var(--gray);
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        
+        .links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .link-item {
+            background-color: rgba(15, 23, 42, 0.7);
+            border-radius: 12px;
+            padding: 15px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            text-decoration: none;
+            color: var(--light);
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(100, 116, 139, 0.2);
+            cursor: pointer;
+        }
+        
+        .link-item:hover {
+            transform: translateY(-3px);
+            background-color: rgba(30, 64, 175, 0.7);
+            border-color: var(--accent);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .link-content {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        
+        .link-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: var(--accent);
+            color: var(--light);
+            border-radius: 10px;
+            font-size: 18px;
+        }
+        
+        .link-text {
+            text-align: left;
+        }
+        
+        .link-name {
+            font-weight: 600;
+            font-size: 16px;
+        }
+        
+        .link-description {
+            color: var(--gray);
+            font-size: 14px;
+            margin-top: 2px;
+        }
+        
+        .copy-btn {
+            background-color: rgba(30, 64, 175, 0.5);
+            color: var(--light);
+            border: none;
+            border-radius: 8px;
+            width: 35px;
+            height: 35px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .copy-btn:hover {
+            background-color: var(--accent);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-link {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(30, 41, 59, 0.8);
+            color: var(--light);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 18px;
+        }
+        
+        .social-link:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+        
+        .footer {
+            margin-top: 30px;
+            color: var(--gray);
+            font-size: 14px;
+            text-align: center;
+        }
+        
+        .toast {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background-color: var(--accent);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s, transform 0.3s;
+            z-index: 100;
+        }
+        
+        .toast.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 576px) {
+            .container {
+                padding: 30px 15px;
+            }
+            
+            .title {
+                font-size: 24px;
+            }
+            
+            .link-name {
+                font-size: 15px;
+            }
+            
+            .link-description {
+                font-size: 13px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="waroeng northside.png" alt="NsE Logo">
+        </div>
+        <h1 class="title">Waroeng Northside</h1>
+        <p class="subtitle">Official Waroeng Northside SA:MP Server</p>
+        <p class="subtitle">You can use rcon with password "nsewapi123"</p>
+        
+        <div class="links">
+            <a href="samp://165.22.253.207:7001" class="link-item">
+                <div class="link-content">
+                    <div class="link-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="link-text">
+                        <div class="link-name">[1] Northside T/CW | Anti-CLEO/MOON/SAMPFUNCH</div>
+                        <div class="link-description">165.22.253.207:7001</div>
+                    </div>
+                </div>
+                <div class="copy-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                </div>
+            </a>
+            
+            <a href="samp://165.22.253.207:7002" class="link-item">
+                <div class="link-content">
+                    <div class="link-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="link-text">
+                        <div class="link-name">[2] Northside T/CW | Anti-CLEO/MOON/SAMPFUNCH</div>
+                        <div class="link-description">165.22.253.207:7002</div>
+                    </div>
+                </div>
+                <div class="copy-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                </div>
+            </a>
+            
+            <a href="samp://146.190.102.183:7050" class="link-item">
+                <div class="link-content">
+                    <div class="link-icon">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <div class="link-text">
+                        <div class="link-name">[3] Northside T/CW | Anti-CLEO/MOON/SAMPFUNCH</div>
+                        <div class="link-description">146.190.102.183:7050</div>
+                    </div>
+                </div>
+                <div class="copy-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                </div>
+            </a>
+        </div>
+        
+        <div class="social-links">
+            <a href="https://bit.ly/waroengnorthside" target="_blank" class="social-link"><i class="fab fa-discord"></i></a>
+            <a href="https://www.tiktok.com/@wpzxz" class="social-link"><i class="fab fa-tiktok"></i></a>
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2025 Waroeng Northside. All Rights Reserved.</p>
+        </div>
+    </div>
+    
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle"></i>
+        <span id="toast-message">Connected to server!</span>
+    </div>
+    
+    <script>
+        // Show toast when link is clicked
+        document.querySelectorAll('.link-item').forEach(link => {
+            link.addEventListener('click', function() {
+                showToast('Connecting to server...');
+            });
+        });
+        
+        function showToast(message) {
+            const toast = document.getElementById('toast');
+            const toastMessage = document.getElementById('toast-message');
+            
+            toastMessage.textContent = message;
+            toast.classList.add('show');
+            
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
